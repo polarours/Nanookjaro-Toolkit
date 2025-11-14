@@ -1,5 +1,7 @@
 # Nanookjaro Toolkit
 
+Language: English (en) | [中文](README_zh-CN.md)
+
 Cross-platform hardware detection, system performance monitoring and package management toolkit (Flutter frontend / C++ backend / dart:ffi)
 
 ## Project Overview
@@ -55,12 +57,12 @@ Note: Different platforms have limitations on visibility of certain hardware inf
 ## Architecture Design
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                        Frontend                        │
-│                    Flutter Desktop App                  │
-│  - UI layer (dashboard, details, settings)              │
-│  - Providers / State management (Riverpod/Provider)     │
-│  - FFI bridge -> serialize/deserialize JSON             │
+┌──────────────────────────────────────────────────────────┐
+│                        Frontend                          │
+│                    Flutter Desktop App                   │
+│  - UI layer (dashboard, details, settings)               │
+│  - Providers / State management (Riverpod/Provider)      │
+│  - FFI bridge -> serialize/deserialize JSON              │
 └──────────────────────────┬───────────────────────────────┘
                            │ dart:ffi (synchronous/async)
 ┌──────────────────────────┴───────────────────────────────┐
