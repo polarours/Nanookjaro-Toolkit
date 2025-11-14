@@ -1,0 +1,85 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake pkg-config libudev-dev libpci-dev smartmontools
+
+    - name: Build core library
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. -DNANOOKJARO_BUILD_TESTS=ON
+        cmake --build . --config Release -j$(nproc)
+
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure
+
+  build-arch:
+    runs-on: ubuntu-22.04
+    container:
+      image: archlinux:base-devel
+    steps:
+    - name: Install dependencies
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S --noconfirm cmake ninja git pciutils smartmontools pacman-contrib base-devel flutter
+
+    - uses: actions/checkout@v4
+
+    - name: Build for Arch
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. -DNANOOKJARO_BUILD_TESTS=ON
+        cmake --build . --config Release -j$(nproc)
+
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup cmake
+      uses: lukka/get-cmake@v3
+
+    - name: Build core library
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build . --config Release
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        brew install cmake
+
+    - name: Build core library
+      run: |
+        mkdir -p build
+        cd build
+        cmake ..
+        cmake --build . --config Release

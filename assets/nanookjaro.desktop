@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Nanookjaro Toolkit
+Comment=Hardware detection and system monitoring toolkit
+Exec=nanookjaro-frontend
+Icon=nanookjaro
+Terminal=false
+Type=Application
+Categories=System;Monitor;HardwareSettings;
+Keywords=system;monitoring;hardware;performance;pacman;

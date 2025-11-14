@@ -1,0 +1,32 @@
+name: nanookjaro_frontend
+description: "A cross-platform hardware detection and system monitoring toolkit for Manjaro/Arch Linux"
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_riverpod: ^2.5.1
+  google_fonts: ^6.1.0
+  intl: ^0.20.2
+  ffi: ^2.1.0
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    
+  # Enable generation of localized Strings from arb files
+  generate: true
